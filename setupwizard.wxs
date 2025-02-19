@@ -1,0 +1,74 @@
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="A5B7A2BC-2830-4167-90F4-8FB718F085B0" UpgradeCode="E796DDE4-653F-41D1-9C4E-200E085DFCF2" Version="1.0.0.0">
+    <Package InstallerVersion="200" InstallScope="perMachine" InstallPrivileges="elevated" Compressed="yes" />
+    <Media />
+    <Icon Id="MyIcon" SourceFile="ICON.ico" />
+    <WixVariable Id="WixUIDialogBmp" Value="WIZARDER.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="HEADERER.bmp" />
+    <WixVariable Id="WixUILicenseRtf" Value="ADB Windows Toolkit License Agreement.rtf" />
+    <Property Id="ARPPRODUCTICON" Value="MyIcon" />
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="MenuAppFolder" Name="TheAppName" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="MyAppFolder" Name="ADB Windows Toolkit" />
+      </Directory>
+    </Directory>
+    <ComponentGroup Id="RemoveFolders">
+      <ComponentRef Id="Remove.MenuAppFolder" />
+      <ComponentRef Id="Remove.ProgramFilesFolder" />
+    </ComponentGroup>
+    <ComponentGroup Id="AndroidToolKit">
+      <ComponentRef Id="CIdF6DC7581" />
+      <ComponentRef Id="CIdA107F742" />
+      <ComponentRef Id="CId40DB97FF" />
+    </ComponentGroup>
+    <Feature Id="ProductFeature" Title="ADB Windows Toolkit" Description="no desc">
+      <ComponentGroupRef Id="RemoveFolders" />
+      <ComponentGroupRef Id="AndroidToolKit" />
+    </Feature>
+    <UIRef Id="WixUI_FeatureTree" />
+    <DirectoryRef Id="ProgramFilesFolder">
+      <Component Id="Remove.ProgramFilesFolder" Guid="19F2D771-B61C-4BD9-89D6-48F2F092555E">
+        <RemoveFolder Id="ProgramFilesFolder" On="uninstall" />
+        <RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="MyAppFolder">
+      <Component Id="CId40DB97FF" Guid="17854462-EBC7-4D11-B2A0-7BEB0D99880B" Win64="no">
+        <File Id="FIdBAE7BD6D" Name="ADBToolkit.exe" Source="C:\Users\zohan\source\repos\ADBToolkit\ADBToolkit\bin\Release\" />
+        <CreateFolder />
+      </Component>
+      <Component Id="CIdA107F742" Guid="096AAA9C-6D99-4720-A732-6FDD4C78A85D" Win64="no">
+        <File Id="FId14C34F58" Name="ADBToolkit.exe.config" Source="C:\Users\zohan\source\repos\ADBToolkit\ADBToolkit\bin\Release\" />
+        <CreateFolder />
+      </Component>
+      <Component Id="CIdF6DC7581" Guid="B243D5B1-A929-43DB-9A65-311DE12B5224" Win64="no">
+        <File Id="FId549BDA16" Name="ADBToolkit.pdb" Source="C:\Users\zohan\source\repos\ADBToolkit\ADBToolkit\bin\Release\" />
+        <CreateFolder />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="ProgramMenuFolder">
+      <Component Id="CSCId44BADD79" Guid="46DBA3C9-4770-4AF6-AAA4-D4D9E3088B72">
+        <Shortcut Id="SId1A620761" Name="ADB Windows Toolkit" Target="[!FIdBAE7BD6D]" WorkingDirectory="MyAppFolder" Icon="MyIcon" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Id="CSCId44BADD79" Directory="ProgramMenuFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="MenuAppFolder">
+      <Component Id="Remove.MenuAppFolder" Guid="05597D79-7BE8-4FC7-9C7E-81CF61658A39">
+        <RemoveFolder Id="MenuAppFolder" On="uninstall" />
+        <RegistryValue Root="HKMU" Key="Software\[Manufacturer]\[ProductName]" Type="string" Value="" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="CSCId2DCD7D2D" Guid="EA4BD675-675F-4791-B70C-15BBEF06A09E">
+        <Shortcut Id="SIdF679203B" Name="ADB Windows Toolkit" Target="[!FIdBAE7BD6D]" WorkingDirectory="MyAppFolder" Icon="MyIcon" />
+        <RegistryValue Root="HKCU" Key="Software\[Manufacturer]\[ProductName]" Name="installed" Type="integer" Value="1" KeyPath="yes" />
+        <RemoveFolder Id="CSCId2DCD7D2D" Directory="DesktopFolder" On="uninstall" />
+      </Component>
+    </DirectoryRef>
+  </Product>
+</Wix>
