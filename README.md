@@ -16,3 +16,5 @@ Key Features
 🔹 Runs as Administrator – Ensures proper execution of ADB commands without errors.
 
 By eliminating the need for manual command-line interactions, ADB Windows Toolkit makes it easier for people with injuries or disabilities to control their Android devices. 🚀
+
+[Download ADB Windows Toolkit from here](https://github.com/ZohanHaqu/ADB-Windows-Toolkit/releases/download/1.0/ADBToolkitSetup.msi)
